@@ -1,0 +1,10 @@
+{
+    {
+        @ n vardear
+        {
+            n varfall
+        } {
+            @ 1 - 0 - factorial vessel . *
+        } n vessel 1 < am? .
+    } factorial vardear 6 factorial vessel . !
+} .
