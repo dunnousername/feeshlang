@@ -1,0 +1,2 @@
+# feeshlang
+ esolang with ffi
