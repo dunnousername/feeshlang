@@ -1,0 +1,8 @@
+business
+    windll vardear
+    cdll vardear
+
+windll vessel user32 _ MessageBoxW _
+    msgbox vardear
+
+0 : haeh `feesh!' ~ msgbox vessel 4 : %

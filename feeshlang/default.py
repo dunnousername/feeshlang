@@ -1,5 +1,6 @@
 from .ftypes import singletons, Function, FFunction
 from .utils import list_rindex
+from ctypes import cdll, windll
 
 def scan_forwards(context, needle):
     j = 1
@@ -46,6 +47,21 @@ def dup(c):
     x = c.data.pop()
     c.data.extend([x, x])
 
+def superexec(c):
+    num_args = c.data.pop()
+    f = c.data.pop()
+    args = [c.data.pop() for x in range(num_args)]
+    c.data.append(f(*args))
+
+def getattrwrapper(c):
+    attr = c.data.pop()
+    obj = c.data.pop()
+    c.data.append(getattr(obj, attr))
+
+def business(c):
+    c.data.append(cdll)
+    c.data.append(windll)
+
 table = {
     '.': Function(lambda c: c.data.pop()(c), name='.'),
     ',': Function(lambda c: None, name=','),
@@ -67,4 +83,10 @@ table = {
     '@': Function(dup, name='dup'),
     '>': Function(lambda c: c.data.append(c.data.pop() > c.data.pop()), name='>'),
     '<': Function(lambda c: c.data.append(c.data.pop() < c.data.pop()), name='<'),
+    '%': Function(superexec, name='%'),
+    '_': Function(getattrwrapper, name='_'),
+    'business': Function(business, name='business'),
+    '#': Function(lambda c: c.data.pop(), name='#'),
+    '~': Function(lambda c: c.data.append(None), name='~'),
+    ':': Function(lambda c: c.data.append(int(c.data.pop())), name=':')
 }

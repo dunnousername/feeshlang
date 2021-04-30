@@ -27,6 +27,10 @@ grammar = """
         | PERCENT
         | GREATER
         | LESSER
+        | UNDER
+        | BUSINESS
+        | HASH
+        | COLON
 
     
     
@@ -52,6 +56,10 @@ grammar = """
     PERCENT: "%"
     GREATER: ">"
     LESSER:  "<"
+    UNDER:   "_"
+    BUSINESS:"business"
+    HASH:    "#" 
+    COLON:   ":"
     
     identifier: CNAME
     number: SIGNED_NUMBER
